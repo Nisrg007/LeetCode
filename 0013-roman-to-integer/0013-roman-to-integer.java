@@ -9,16 +9,27 @@ class Solution {
         hm.put('D',500 );
         hm.put('M',1000 );
 
-        int result=hm.get(s.charAt(s.length()-1));
-        
-        for (int i = s.length()-2; i >= 0; i--) {
+        int result=0;
+        for (int i = 0; i < s.length(); i++) {
             
-            if (hm.get(s.charAt(i))<hm.get(s.charAt(i+1))) {
-               result=result-hm.get(s.charAt(i));
-            }else{
-                result=result+hm.get(s.charAt(i));
+            int first=hm.get(s.charAt(i)); //ith element
+            int second; //when ith element is last need to check i+1 is nor morethan index s.length 
 
+            if (i+1 <s.length()) {
+                second=hm.get(s.charAt(i+1));
+                if (first<second) {
+                    result+=second-first;  //when second number is larger than first
+                    i++;
+                }
+                else{
+                    result+=first;
+                }
+
+            }else{ //for last element of i
+                result+=first;
             }
         }
         return result;
-}}
+
+    }
+}
